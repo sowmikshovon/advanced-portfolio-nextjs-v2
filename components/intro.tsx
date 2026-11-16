@@ -38,7 +38,7 @@ export default function Intro() {
           className="h-2 w-2 rounded-full bg-emerald-500"
           aria-hidden="true"
         />
-        MSc @ LUT University (Lahti, Finland) · Open to Finland &amp; EU Roles
+        Tampere, Finland · MSc @ LUT University · Open to Finland &amp; EU Roles
       </motion.div>
 
       <div className="flex items-center justify-center">

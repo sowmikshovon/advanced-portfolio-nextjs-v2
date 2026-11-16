@@ -308,3 +308,30 @@ test("lib/data.ts: skillsData has no duplicates and covers all skillCategories e
     }
   }
 });
+
+test("location standardization: Tampere, Finland, LUT University, Finland, and Finland & EU with no Lahti/Helsinki", () => {
+  assert.ok(
+    cvData.cvProfile.location.includes("Tampere, Finland"),
+    `Expected cvProfile.location to include "Tampere, Finland", got "${cvData.cvProfile.location}"`
+  );
+  assert.equal(
+    data.educationData[0].location,
+    "Finland & EU",
+    `Expected educationData[0].location to equal "Finland & EU", got "${data.educationData[0].location}"`
+  );
+
+  const filesToCheck = [
+    "lib/data.ts",
+    "lib/cv-data.ts",
+    "components/intro.tsx",
+    "components/about.tsx",
+  ];
+  for (const relPath of filesToCheck) {
+    const content = fs.readFileSync(path.join(PROJECT_ROOT, relPath), "utf8");
+    assert.doesNotMatch(
+      content,
+      /\b(Lahti|Helsinki)\b/i,
+      `${relPath} must not contain Lahti or Helsinki`
+    );
+  }
+});
